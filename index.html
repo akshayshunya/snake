@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json">
+    <title>Apple Catching Game</title>
+    <style>
+        body { 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        canvas {
+            background: #ffffff;
+            border: 2px solid #000;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        let apple, score;
+        
+        function setup() {
+            score = 0;
+            spawnApple();
+            requestAnimationFrame(gameLoop);
+        }
+        
+        function spawnApple() {
+            apple = {
+                x: Math.floor(Math.random() * (canvas.width - 10)),
+                y: Math.floor(Math.random() * (canvas.height - 10)),
+                size: 10
+            };
+        }
+        
+        function gameLoop() {
+            clearCanvas();
+            drawApple();
+            updateScore();
+            detectCatch();
+            requestAnimationFrame(gameLoop);
+        }
+        
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+        
+        function drawApple() {
+            ctx.fillStyle = 'red';
+            ctx.fillRect(apple.x, apple.y, apple.size, apple.size);
+        }
+        
+        function updateScore() {
+            ctx.fillStyle = 'black';
+            ctx.font = '20px Arial';
+            ctx.fillText(`Score: ${score}`, 10, 20);
+        }
+        
+        function detectCatch() {
+            // Placeholder for apple catch check logic
+        }
+        
+        setup();
+    </script>
+</body>
+</html>
